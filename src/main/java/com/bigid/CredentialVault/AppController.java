@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bigid.CredentialVault.AppTypes.Action;
 import com.bigid.CredentialVault.AppTypes.ActionRequest;
 import com.bigid.CredentialVault.AppTypes.AppCategory;
 import com.bigid.CredentialVault.AppTypes.ExecutionResult;
@@ -25,6 +26,12 @@ public class AppController {
         result.license_type = LicenseType.FREE;
         result.vendor = "BigID";
         result.is_interactive = false;
+
+        Action vaultAction = new Action();
+        vaultAction.action_id = "vault";
+        vaultAction.description = "The action provides data source credentials for a vault";
+        vaultAction.is_sync = false;
+        result.actions.add(vaultAction);
         return result;
     }
 
