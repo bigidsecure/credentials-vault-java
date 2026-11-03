@@ -1,20 +1,25 @@
-# Sample Credential Provider App
+# Sample Credential Provider App (Java)
 
-This application shows a sample implementation of a BigID app that supplies credentials from a credential vault.
+A Spring Boot example of a BigID TPA credential provider. It advertises a `vault` action and returns a fixed placeholder username/password only for the sample query `test`; it does not integrate with an actual credential vault.
 
-**This sample application does not implement any security and should not be exposed to the wider internet**
-# Setup
+## API
 
-run the application by running:
+- `GET /manifest` returns the app manifest.
+- `POST /execute` handles the `vault` action request.
 
+## Run locally
+
+Requires JDK 21 (see `pom.xml`). From the repository root:
+
+```sh
 ./mvnw spring-boot:run
+```
 
-The application will then be accessible on port 8080.
-## Customization
+Spring Boot’s default port is **8080**. The sample is also packaged as a standard Spring Boot Maven application.
 
-By default this application will provide the username password combination user:pass when passed the query "test" from BigID.
+## Security and limitations
 
-Edit line 54 of src/java/com/bigid/CredentialVault/AppController.java to change that behavior.
+The implementation has no authentication or secure vault integration, and prints the lookup query. It is a teaching sample only; do not expose it publicly or use the placeholder response as a real credential source. Replace the lookup with a properly secured secret-manager integration before adapting it.
 
 <!-- bigidsecure-community-guidance -->
 ## BigID Community
